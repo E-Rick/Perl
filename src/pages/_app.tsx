@@ -1,24 +1,14 @@
+import { AppProviders } from '@/components/AppProviders'
+import type { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
-import { APP_NAME } from '@/lib/consts'
 import '@rainbow-me/rainbowkit/styles.css'
-import { chain, createClient, WagmiConfig } from 'wagmi'
-import { apiProvider, configureChains, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import 'degen/styles'
 
-const { chains, provider } = configureChains(
-	[chain.optimism],
-	[apiProvider.infura(process.env.NEXT_PUBLIC_INFURA_ID), apiProvider.fallback()]
-)
-
-const { connectors } = getDefaultWallets({ appName: APP_NAME, chains })
-const wagmiClient = createClient({ autoConnect: true, connectors, provider })
-
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 	return (
-		<WagmiConfig client={wagmiClient}>
-			<RainbowKitProvider chains={chains}>
-				<Component {...pageProps} />
-			</RainbowKitProvider>
-		</WagmiConfig>
+		<AppProviders>
+			<Component {...pageProps} />
+		</AppProviders>
 	)
 }
 
