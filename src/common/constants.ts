@@ -1,0 +1,2 @@
+export const APP_NAME = 'Perl'
+export const RINKEBY_ADDRESS = '0x2d2acD205bd6d9D0B3E79990e093768375AD3a30'
