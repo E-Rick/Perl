@@ -7,6 +7,7 @@ import { ThemeProvider } from 'degen'
 import { chain, createClient, WagmiConfig, configureChains } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { UserContextProvider } from '@/context/user/UserContextProvider'
 
 const { chains, provider } = configureChains(
 	[chain.mainnet, chain.rinkeby],
@@ -20,7 +21,9 @@ export const AppProviders = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ThemeProvider>
 			<WagmiConfig client={wagmiClient}>
-				<RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
+				<RainbowKitProvider chains={chains}>
+					<UserContextProvider>{children}</UserContextProvider>
+				</RainbowKitProvider>
 			</WagmiConfig>
 		</ThemeProvider>
 	)
